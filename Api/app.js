@@ -5,7 +5,7 @@ var cors = require('cors');
 var userRouter = require('./src/routes/users.js');
 
 
-// Middlewares
+// Middlewares temas de los cors
 app.use(cors());
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
