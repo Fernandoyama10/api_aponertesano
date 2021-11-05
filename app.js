@@ -3,6 +3,7 @@ const app = express();
 var cors = require('cors');
 // Settings
 var userRouter = require('./src/routes/users.js');
+var yucfoodRouter = require('./src/routes/yucfood.js');
 
 
 // Middlewares temas de los cors
@@ -12,6 +13,7 @@ app.use(express.json());
 
 // Routes
 app.use('/api', userRouter);
+app.use('/apiyucfood', yucfoodRouter);
 
 // Starting the server
 app.listen(app.get('port'), () => {
