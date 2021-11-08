@@ -8,7 +8,7 @@ router.get('/login/:email', usersController.login);
 
 router.post('/register', usersController.register);
 
-router.get('/getUserData/:id_user', usersController.getUserData);
+router.get('/logindata/:email', usersController.logindata);
 
 
 module.exports = router;
