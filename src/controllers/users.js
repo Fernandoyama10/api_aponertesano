@@ -27,7 +27,7 @@ exports.logindata = async (req, res) => {
   const params = req.params;
   mysqlConnection.query('SELECT U.id_user, U.email, U.password, U.id_role, I.name, I.surname, I.age, I.weight, I.gender, I.height, A.name_level, A.value_level  FROM infouser I , level_activity A, users U where A.id_activity = I.id_activity AND I.id_user = U.id_user AND ?', [params], (err, rows, fields) => {
     if (!err) {
-      res.json(rows[0]);
+      res.send(rows);
     } else {
       console.log(err);
     }
