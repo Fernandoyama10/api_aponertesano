@@ -23,6 +23,17 @@ exports.getByID = async (req, res) => {
   });
 }
 
+exports.getUserData = async (req, res) => {
+  const params = req.params;
+  mysqlConnection.query('SELECT I.name, I.surname, I.age, I.weight, I.gender, I.height, I.id_activity, A.name_level, A.value_level  FROM infouser I , level_activity A where A.id_activity = I.id_activity AND ?', [params], (err, rows, fields) => {
+    if (!err) {
+      res.json(rows[0]);
+    } else {
+      console.log(err);
+    }
+  });
+}
+
 exports.login = async (req, res) => {
   try {
     const params = req.params;
