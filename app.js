@@ -5,6 +5,7 @@ var cors = require('cors');
 var userRouter = require('./src/routes/users.js');
 var yucfoodRouter = require('./src/routes/yucfood.js');
 var interfoodRouter = require('./src/routes/yucfood.js');
+var caloriesfoodRouter = require('./src/routes/calories.js');
 
 // Middlewares temas de los cors
 app.use(cors());
@@ -15,6 +16,8 @@ app.use(express.json());
 app.use('/api', userRouter);
 app.use('/apiyucfood', yucfoodRouter);
 app.use('/apinterfood', interfoodRouter);
+app.use('/apicalories', caloriesfoodRouter);
+
 
 // Starting the server
 app.listen(app.get('port'), () => {
