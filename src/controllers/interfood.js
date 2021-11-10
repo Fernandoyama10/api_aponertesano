@@ -9,7 +9,7 @@ exports.registerfood = async (req, res) => {
           res.send({ message: "Error en el registro", statusCode: 400 });
         } else {
             res.send(resultado);
-          mysqlConnection.query('UPDATE calories_result SET ? WHERE id_user = ?', [{ final_calories: calories }, id_user], (error, results) => {
+          mysqlConnection.query('UPDATE calories_result SET ? WHERE id_user = ?', [{ final_calories: calories }], [{ id_user: id_user }], (error, results) => {
             if (error) {
               res.send({ message: "Error en la Calories Result", statusCode: 400 });
             } else {
