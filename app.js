@@ -4,7 +4,7 @@ var cors = require('cors');
 // Settings
 var userRouter = require('./src/routes/users.js');
 var yucfoodRouter = require('./src/routes/yucfood.js');
-var interfoodRouter = require('./src/routes/yucfood.js');
+var interfoodRouter = require('./src/routes/interfood.js');
 
 // Middlewares temas de los cors
 app.use(cors());
