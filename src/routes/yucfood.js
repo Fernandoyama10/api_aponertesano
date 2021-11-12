@@ -3,5 +3,5 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/get-yucfood', yucfoodController.getyucfood);
-router.get('/get-yucfood/:id_yucatan_food', yucfoodController.getyucfoodID);
+router.get('/get-yucfood/:name', yucfoodController.getyucfoodName);
 module.exports = router;

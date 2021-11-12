@@ -11,11 +11,11 @@ exports.getyucfood = async (req, res) => {
     });
   }
 
-  exports.getyucfoodID = async (req, res) => {
+  exports.getyucfoodName = async (req, res) => {
     const params = req.params;
-    mysqlConnection.query('SELECT * FROM yucatan_food WHERE ?', [params], (err, rows, fields) => {
+    mysqlConnection.query("SELECT * from yucatan_food where food_name like '%" + req.params.name + "%'", [params], (err, rows, fields) => {
       if (!err) {
-        res.json(rows[0]);
+        res.json(rows);
       } else {
         console.log(err);
       }
