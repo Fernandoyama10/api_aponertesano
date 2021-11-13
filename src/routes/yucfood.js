@@ -4,6 +4,6 @@ const router = express.Router();
 
 router.get('/get-yucfood', yucfoodController.getyucfood);
 router.get('/get-yucfood/:name', yucfoodController.getyucfoodName);
-router.post('/get-records', yucfoodController.getFoodRecord);
-router.post('/get-recordcalories', yucfoodController.getCaloriesRecord);
+router.get('/get-records/:date_r/:id_user', yucfoodController.getFoodRecord);
+router.get('/get-recordcalories/:date_r/:id_user', yucfoodController.getCaloriesRecord);
 module.exports = router;
