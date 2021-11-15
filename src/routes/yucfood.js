@@ -5,8 +5,8 @@ const router = express.Router();
 router.get('/get-yucfood', yucfoodController.getyucfood);
 router.get('/get-yucfood/:id_yucatan_food', yucfoodController.getyucfoodID);
 router.post('/add-yucfood/', yucfoodController.addyucafood);
-router.delete('/add-yucfood/:id_yucatan_food', yucfoodController.deleteyucafood);
-
+router.delete('/delete-yucfood/:id_yucatan_food', yucfoodController.deleteyucafood);
+router.put('/update-yucfood/:id_yucatan_food', yucfoodController.updateyucafood);
 
 
 module.exports = router;
