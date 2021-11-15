@@ -18,7 +18,7 @@ exports.addrole = async (req, res) => {
   const { role_name } = req.body;
   mysqlConnection.query('INSERT INTO roles set ?', { role_name: role_name }, (error, resultado) => {
     if (error) {
-      res.send({ message: "Error en el registro", statusCode: 400 });
+      res.send({ message: "Error en el REGISTRO", statusCode: 400 });
       res.json(error);
     } else {
       res.json(resultado);
@@ -31,7 +31,7 @@ exports.deleterol = async (req, res) => {
   const params = req.params;
   mysqlConnection.query('DELETE from roles WHERE  ?', [params], (error, resultado) => {
     if (error) {
-      res.send({ message: "Error en el registro", statusCode: 400 });
+      res.send({ message: "Error al ELIMINAR ", statusCode: 400 });
       res.json(error);
     }
     else {
@@ -42,10 +42,11 @@ exports.deleterol = async (req, res) => {
 }
 
 exports.updateroles = async (req, res) => {
-  const { role_name, id_role } = req.body;
-  mysqlConnection.query('UPDATE roles set role_name = ? WHERE id_role = ?', [role_name, id_role], (error, resultado) => {
+  const { role_name } = req.body;
+  const {id_role} = req.params;
+  mysqlConnection.query('UPDATE roles SET ? WHERE id_role = ?', [{role_name}, id_role] , (error, resultado) => {
     if (error) {
-      res.send({ message: "Error en el registro", statusCode: 400 });
+      res.send({ message: "Error en ACTUALIZAR", statusCode: 400 });
       res.json(error);
     } else {
       res.json(resultado);
