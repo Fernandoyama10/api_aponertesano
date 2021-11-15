@@ -73,4 +73,47 @@ exports.register = async (req, res) => {
   }
 }
 
+//////////////////////////////////////////// WEB /////////////////////////////////////////////////////////////
 
+exports.registerweb = async (req, res) => {
+  const { email, password, id_role} = req.body;
+  mysqlConnection.query('INSERT INTO users set ?', {email:email, password:password, id_role:id_role}, (error, resultado) => {
+    if (error) {
+      res.send({ message: "Error al REGISTRAR", statusCode: 400 });
+      res.json(error);
+    } else {
+      res.json(resultado);
+      console.log('Se agrego el registro');
+    }
+  })
+}
+
+
+exports.deleteuser = async (req, res) => {
+  const params = req.params;
+  mysqlConnection.query('DELETE from users WHERE  ?', [params], (error, resultado) => {
+    if (error) {
+      res.send({ message: "Error al ELIMINAR", statusCode: 400 });
+      res.json(error);
+    }
+    else {
+      res.json(resultado);
+      console.log('Se elimino el registro');
+    }
+  })
+}
+
+
+exports.updateuser = async (req, res) => {
+  const {email, password, id_role } = req.body;
+  const {id_user} = req.params;
+  mysqlConnection.query('UPDATE users SET ? WHERE id_user = ?', [{email, password, id_role }, id_user] , (error, resultado) => {
+    if (error) {
+      res.send({ message: "Error al ACTUALIZAR", statusCode: 400 });
+      res.json(error);
+    } else {
+      res.json(resultado);
+      console.log('Se actualizo el registro');
+    }
+  })
+}
