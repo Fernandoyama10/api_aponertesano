@@ -72,3 +72,21 @@ exports.register = async (req, res) => {
     throw e;
   }
 }
+
+
+exports.update = async (req, res) => {
+  try {
+    const { name, surname, age ,weight, gender, height, id_activity, id_user } = req.body;
+    mysqlConnection.query('UPDATE infouser SET name = ?, surname = ?, age = ?, weight = ?, gender = ?, height = ?, id_activity = ? WHERE id_infouser = ?;', 
+    [name, surname, age ,weight, gender, height, id_activity, id_user], (error, resultado) => {
+      if (error) {
+        console.log(error);
+        res.send({ message: "Error para actualizar tus datos", statusCode: 400 });
+      } else {
+        res.send(resultado);
+      }
+    });
+  } catch (e) {
+    throw e;
+  }
+}

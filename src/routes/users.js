@@ -7,6 +7,7 @@ router.get('/get-users/:id_user', usersController.getByID);
 router.get('/login/:email', usersController.login);
 
 router.post('/register', usersController.register);
+router.put('/update', usersController.update);
 
 router.get('/logindata/:email', usersController.logindata);
 
