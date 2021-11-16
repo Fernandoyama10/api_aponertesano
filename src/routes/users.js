@@ -4,6 +4,7 @@ const router = express.Router();
 
 router.get('/get-users', usersController.getusers);
 router.get('/get-users/:id_user', usersController.getByID);
+router.get('/get-infouser/:id_user', usersController.getByInfoUserID);
 router.get('/login/:email', usersController.login);
 
 router.post('/register', usersController.register);
