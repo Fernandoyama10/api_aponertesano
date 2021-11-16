@@ -6,6 +6,9 @@ var userRouter = require('./src/routes/users.js');
 var yucfoodRouter = require('./src/routes/yucfood.js');
 var interfoodRouter = require('./src/routes/interfood.js');
 var caloriesfoodRouter = require('./src/routes/calories.js');
+// Web
+var rolesRouter = require('./src/routes/roles.js');
+
 
 // Middlewares temas de los cors
 app.use(cors());
@@ -17,6 +20,8 @@ app.use('/api', userRouter);
 app.use('/apiyucfood', yucfoodRouter);
 app.use('/apinterfood', interfoodRouter);
 app.use('/apicalories', caloriesfoodRouter);
+// Web
+app.use('/apiroles', rolesRouter);
 
 
 // Starting the server
