@@ -2,6 +2,7 @@ const mysqlConnection = require('../database');
 const mysql = require("mysql");
 
 exports.getyucfood = async (req, res) => {
+<<<<<<< HEAD
 
   mysqlConnection.query('SELECT * FROM yucatan_food', (err, rows, fields) => {
     if (!err) {
@@ -68,6 +69,17 @@ exports.updateyucafood = async (req, res) => {
 }
 
    
+=======
+    mysqlConnection.query('SELECT * FROM yucatan_food', (err, rows, fields) => {
+      if (!err) {
+
+        res.json(rows);
+      } else {
+        console.log(err);
+      }
+    });
+  }
+>>>>>>> parent of a871207 (Merge remote-tracking branch 'origin/Develop_D' into Develop_B)
 
   exports.getyucfoodName = async (req, res) => {
     const params = req.params;
@@ -112,6 +124,10 @@ exports.updateyucafood = async (req, res) => {
   }catch(e){
       throw e;
   }
+<<<<<<< HEAD
   }
 
     
+=======
+  }
+>>>>>>> parent of a871207 (Merge remote-tracking branch 'origin/Develop_D' into Develop_B)

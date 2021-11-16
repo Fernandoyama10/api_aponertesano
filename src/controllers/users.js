@@ -28,7 +28,11 @@ exports.getByInfoUserID = async (req, res) => {
   const params = req.params;
   mysqlConnection.query('SELECT * FROM infouser WHERE ?', [params], (err, rows, fields) => {
     if (!err) {
+<<<<<<< HEAD
       res.json(rows[0]);
+=======
+      res.json(rows);
+>>>>>>> parent of a871207 (Merge remote-tracking branch 'origin/Develop_D' into Develop_B)
     } else {
       console.log(err);
     }
