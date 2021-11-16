@@ -56,3 +56,45 @@ exports.getyucfood = async (req, res) => {
       throw e;
   }
   }
+
+
+  
+
+exports.deleteFood = async (req, res) => {
+  try{ 
+    mysqlConnection.query("DELETE FROM meal_record where id_meal = ? ", [req.params.id_meal], (err, results, fields) => {
+      if (err) {
+          res.send({ message: "Error en el registro", statusCode: 400 });
+      } else {
+          res.send(results);
+          console.log('Se borro el dato');
+      }
+
+    });
+
+}catch(e){
+    throw e;
+}
+}
+
+exports.deleteCalories = async (req, res) => {
+  try{ 
+      const { calories, id_user, date } = req.body;
+      mysqlConnection.query('UPDATE calories_result SET final_calories = (final_calories - ?) WHERE id_user = ? and date = ?', [calories, id_user, date], (error, results) => {
+  if (error) {
+      res.send({ message: "Error en el registro", statusCode: 400 });
+  } else {
+      if (results.changedRows > 0) {
+          res.send(results);
+          console.log('Se eliminaron los resultados');
+      } else {
+          res.send({ message: "Error en el registro", statusCode: 400 });
+          console.log('Error no se elimino');
+      }
+  }
+});
+
+}catch(e){
+    throw e;
+}
+}
