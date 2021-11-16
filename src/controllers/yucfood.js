@@ -64,7 +64,7 @@ exports.deleteFood = async (req, res) => {
   try{ 
     mysqlConnection.query("DELETE FROM meal_record where id_meal = ? ", [req.params.id_meal], (err, results, fields) => {
       if (err) {
-          res.send({ message: "Error en el registro", statusCode: 400 });
+          res.send({ message: "Error en el registroo", statusCode: 400 });
       } else {
           res.send(results);
           console.log('Se borro el dato');
