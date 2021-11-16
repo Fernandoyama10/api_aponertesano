@@ -28,7 +28,7 @@ exports.getByInfoUserID = async (req, res) => {
   const params = req.params;
   mysqlConnection.query('SELECT * FROM infouser WHERE ?', [params], (err, rows, fields) => {
     if (!err) {
-      res.json(rows);
+      res.json(rows[0]);
     } else {
       console.log(err);
     }
