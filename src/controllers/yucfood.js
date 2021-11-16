@@ -2,7 +2,7 @@ const mysqlConnection = require('../database');
 const mysql = require("mysql");
 
 exports.getyucfood = async (req, res) => {
-<<<<<<< Updated upstream
+
   mysqlConnection.query('SELECT * FROM yucatan_food', (err, rows, fields) => {
     if (!err) {
       res.json(rows);
@@ -66,16 +66,8 @@ exports.updateyucafood = async (req, res) => {
     }
   })
 }
-=======
-    mysqlConnection.query('SELECT * FROM yucatan_food', (err, rows, fields) => {
-      if (!err) {
 
-        res.json(rows);
-      } else {
-        console.log(err);
-      }
-    });
-  }
+   
 
   exports.getyucfoodName = async (req, res) => {
     const params = req.params;
@@ -123,4 +115,3 @@ exports.updateyucafood = async (req, res) => {
   }
 
     
->>>>>>> Stashed changes
