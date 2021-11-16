@@ -12,11 +12,23 @@ exports.getusers = async (req, res) => {
 }
 
 
+
 exports.getByID = async (req, res) => {
   const params = req.params;
   mysqlConnection.query('SELECT * FROM users WHERE ?', [params], (err, rows, fields) => {
     if (!err) {
       res.json(rows[0]);
+    } else {
+      console.log(err);
+    }
+  });
+}
+
+exports.getByInfoUserID = async (req, res) => {
+  const params = req.params;
+  mysqlConnection.query('SELECT * FROM infouser WHERE ?', [params], (err, rows, fields) => {
+    if (!err) {
+      res.json(rows);
     } else {
       console.log(err);
     }
@@ -73,47 +85,21 @@ exports.register = async (req, res) => {
   }
 }
 
-//////////////////////////////////////////// WEB /////////////////////////////////////////////////////////////
 
-exports.registerweb = async (req, res) => {
-  const { email, password, id_role} = req.body;
-  mysqlConnection.query('INSERT INTO users set ?', {email:email, password:password, id_role:id_role}, (error, resultado) => {
-    if (error) {
-      res.send({ message: "Error al REGISTRAR", statusCode: 400 });
-      res.json(error);
-    } else {
-      res.json(resultado);
-      console.log('Se agrego el registro');
-    }
-  })
-}
-
-
-exports.deleteuser = async (req, res) => {
-  const params = req.params;
-  mysqlConnection.query('DELETE from users WHERE  ?', [params], (error, resultado) => {
-    if (error) {
-      res.send({ message: "Error al ELIMINAR", statusCode: 400 });
-      res.json(error);
-    }
-    else {
-      res.json(resultado);
-      console.log('Se elimino el registro');
-    }
-  })
-}
-
-
-exports.updateuser = async (req, res) => {
-  const {email, password, id_role } = req.body;
-  const {id_user} = req.params;
-  mysqlConnection.query('UPDATE users SET ? WHERE id_user = ?', [{email, password, id_role }, id_user] , (error, resultado) => {
-    if (error) {
-      res.send({ message: "Error al ACTUALIZAR", statusCode: 400 });
-      res.json(error);
-    } else {
-      res.json(resultado);
-      console.log('Se actualizo el registro');
-    }
-  })
+exports.update = async (req, res) => {
+  try {
+    const { name, surname, age ,weight, gender, height, id_activity, id_user } = req.body;
+    mysqlConnection.query('UPDATE infouser SET name = ?, surname = ?, age = ?, weight = ?, gender = ?, height = ?, id_activity = ? WHERE id_user = ?;', 
+    [name, surname, age ,weight, gender, height, id_activity, id_user], (error, resultado) => {
+      if (error) {
+        console.log(error);
+        res.send({ message: "Error para actualizar tus datos", statusCode: 400 });
+      } else {
+        
+        res.send(resultado);
+      }
+    });
+  } catch (e) {
+    throw e;
+  }
 }
