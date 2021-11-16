@@ -83,7 +83,15 @@ exports.update = async (req, res) => {
         console.log(error);
         res.send({ message: "Error para actualizar tus datos", statusCode: 400 });
       } else {
-        
+        /* mysqlConnection.query('Select * from infouser where id_user = ?;', 
+        [id_user], (err, rows, fields) => {
+          if (error) {
+            console.log(err);
+            res.send({ message: "Error buscar los datos", statusCode: 400 });
+          } else {
+            res.send(rows);
+          }
+        }); */
         res.send(resultado);
       }
     });
