@@ -64,13 +64,13 @@ exports.login = async (req, res) => {
 
 exports.register = async (req, res) => {
   try {
-    const { email, password, id_role, name, surname, weight, age, gender, height, id_activity } = req.body;
+    const { email, password, id_role, name, surname, weight, age, gender, height, id_activity, fb_complete } = req.body;
     mysqlConnection.query('INSERT INTO users set ?', { email: email, password: password, id_role: id_role }, (error, resultado) => {
       if (error) {
         res.send({ message: "Ya existe el usuario o existe un error", statusCode: 400 });
       } else {
         res.send(resultado);
-        mysqlConnection.query('INSERT INTO infouser set ?', { name: name, surname: surname, weight: weight, age: age, gender: gender, height: height, id_activity: id_activity, id_user: resultado.insertId }, (error, results) => {
+        mysqlConnection.query('INSERT INTO infouser set ?', { name: name, surname: surname, weight: weight, age: age, gender: gender, height: height, id_activity: id_activity, id_user: resultado.insertId, fb_complete: fb_complete }, (error, results) => {
           if (error) {
             res.send({ message: "Error en la Info de Usuario", statusCode: 400 });
           } else {
@@ -105,6 +105,36 @@ exports.update = async (req, res) => {
           }
         });
         //res.send(resultado);
+      }
+    });
+  } catch (e) {
+    throw e;
+  }
+}
+
+
+exports.savefeedback = async (req, res) => {
+  try {
+    const { value_feed, id_user, fb_complete } = req.body;
+    mysqlConnection.query('INSERT INTO feedback set ?', { value_feed: value_feed, id_user: id_user }, (error, resultado) => {
+      if (error) {
+        res.send({ message: "No se registro error", statusCode: 400 });
+      } else {
+       
+        mysqlConnection.query('UPDATE infouser SET fb_complete = ? WHERE id_user = ?', [fb_complete, id_user], (error, results) => {
+          if (error) {
+              res.send({ message: "Error en el registro", statusCode: 400 });
+          } else {
+              if (results.changedRows > 0) {
+                  res.send(results);
+                  console.log('Se inserto el feedback');
+              } else {
+
+                res.send({ message: "No se actualizo inforuser", statusCode: 400 });
+              }
+          }
+      });
+
       }
     });
   } catch (e) {

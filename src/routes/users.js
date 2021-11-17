@@ -9,7 +9,7 @@ router.get('/login/:email', usersController.login);
 
 router.post('/register', usersController.register);
 router.put('/update', usersController.update);
-
+router.post('/savefeedback', usersController.savefeedback);
 router.get('/logindata/:email', usersController.logindata);
 
 
