@@ -96,7 +96,15 @@ exports.update = async (req, res) => {
         res.send({ message: "Error para actualizar tus datos", statusCode: 400 });
       } else {
         
-        res.send(resultado);
+        mysqlConnection.query('SELECT U.id_user, U.email, U.password, U.id_role, I.name, I.surname, I.age, I.weight, I.gender, I.height, A.name_level, A.value_level  FROM infouser I , level_activity A, users U where A.id_activity = I.id_activity AND I.id_user = U.id_user AND name = ?', [name], (err, rows, fields) => {
+          if (!err) {
+            res.send(rows);
+          } else {
+            console.log(err);
+            res.send({ message: "Error para actualizar tus datos y buscarlos verifique", statusCode: 400 });
+          }
+        });
+        //res.send(resultado);
       }
     });
   } catch (e) {
