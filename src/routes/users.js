@@ -11,6 +11,6 @@ router.post('/register', usersController.register);
 router.put('/update', usersController.update);
 router.post('/savefeedback', usersController.savefeedback);
 router.get('/logindata/:email', usersController.logindata);
-
+router.get('/refreshdata/:id_user', usersController.refreshdata);
 
 module.exports = router;
