@@ -133,18 +133,18 @@ exports.savefeedback = async (req, res) => {
       if (error) {
         res.send({ message: "No se registro error", statusCode: 400 });
       } else {
-       
         mysqlConnection.query('UPDATE infouser SET fb_complete = ? WHERE id_user = ?', [fb_complete, id_user], (error, results) => {
           if (error) {
               res.send({ message: "Error en el registro", statusCode: 400 });
           } else {
-              if (results.changedRows > 0) {
-                  res.send(results);
-                  console.log('Se inserto el feedback');
+            mysqlConnection.query('SELECT U.id_user, U.email, U.password, U.id_role, I.name, I.surname, I.age, I.weight, I.gender, I.height, A.name_level, A.value_level, I.fb_complete  FROM infouser I , level_activity A, users U where A.id_activity = I.id_activity AND I.id_user = U.id_user AND I.id_user = ?', [id_user], (err, rows, fields) => {
+              if (!err) {
+                res.send(rows);
               } else {
-
-                res.send({ message: "No se actualizo inforuser", statusCode: 400 });
+                console.log(err);
+                res.send({ message: "Error para actualizar tus datos y buscarlos verifique", statusCode: 400 });
               }
+            });
           }
       });
 
