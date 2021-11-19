@@ -10,7 +10,7 @@ exports.caloriesdata = async (req, res) => {
             var data = [];
             data.push(rows[0]);
 
-     
+           
               var calculocalorias = data[0].calories;
               console.log(calculocalorias);
               var initial_calories = data[0].initial_calories;
@@ -21,24 +21,21 @@ exports.caloriesdata = async (req, res) => {
           if(initial_calories == null){
             id_estatus = 1;
             data[0].id_estatus = id_estatus;
-            console.log('entroo estatus 1');
-            console.log(id_estatus);
+            data[0].name_status = "No haz registrado";
+       
           }else if (initial_calories == 0 || calculocalorias <= operation1) {
             id_estatus = 2;
-            console.log('entroo estatus 2');
-            console.log(id_estatus);
             data[0].id_estatus = id_estatus;
+            data[0].name_status = "Vas bien";
           } else if (calculocalorias > operation1 &&
               calculocalorias < initial_calories) {
             id_estatus = 3;
-            console.log('entroo estatus 3');
-            console.log(id_estatus);
+            data[0].name_status = "Equilibrado";
             data[0].id_estatus = id_estatus;
           }
           if (calculocalorias > initial_calories) {
             id_estatus = 4;
-            console.log('entroo estatus 4');
-            console.log(id_estatus);
+            data[0].name_status = "Excedido";
             data[0].id_estatus = id_estatus;
           }
             mysqlConnection.query('UPDATE calories_result SET id_status = ? WHERE id_user = ? and date = ?', [id_estatus, id_user, date_r], (error, results) => {
