@@ -7,9 +7,10 @@ exports.caloriesdata = async (req, res) => {
       var id_estatus = 1;
         mysqlConnection.query('SELECT SUM(calories) as calories, SUM(protein) as protein, SUM(fat) as fat, SUM(carbs) as carbs, SUM(sugar) as sugar, SUM(sodium) as sodium, initial_calories, C.id_status, name_status, date, M.id_user FROM meal_record as M join calories_result as C ON M.id_user = C.id_user and M.date_r = C.date join status as S ON S.id_status = C.id_status WHERE M.date_r = ? and  C.id_user = ?', [date_r, id_user], (err, rows, fields) => {
           if (!err) {
-            res.send(rows[0]);
-              var calculocalorias = rows[0].calories;
-              var initial_calories = rows[0].initial_calories;
+            var data = [];
+            data.push(rows[0]);
+              var calculocalorias = data.calories;
+              var initial_calories = data.initial_calories;
               var operation1 = initial_calories / 2; //vas bien
      
           //3000 / 2 = 1500
@@ -40,9 +41,11 @@ exports.caloriesdata = async (req, res) => {
               } else {
                   if (results.changedRows > 0) {
                     console.log('SE ACTUALIZO');
+                    res.send(data);
                   } else {
 
                     console.log('NO SE ACTUALIZO');
+                    res.send(data);
                   }
               }
           });
