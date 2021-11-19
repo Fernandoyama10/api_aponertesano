@@ -9,8 +9,9 @@ exports.caloriesdata = async (req, res) => {
           if (!err) {
             var data = [];
             data.push(rows[0]);
-              var calculocalorias = data.calories;
-              var initial_calories = data.initial_calories;
+              var calculocalorias = data[0].calories;
+              console.log(calculocalorias);
+              var initial_calories = data[0].initial_calories;
               var operation1 = initial_calories / 2; //vas bien
      
           //3000 / 2 = 1500
