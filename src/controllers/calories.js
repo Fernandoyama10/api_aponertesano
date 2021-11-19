@@ -3,9 +3,49 @@ const mysql = require("mysql");
 
 exports.caloriesdata = async (req, res) => {
     try{ 
-        mysqlConnection.query('SELECT SUM(calories) as calories, SUM(protein) as protein, SUM(fat) as fat, SUM(carbs) as carbs, SUM(sugar) as sugar, SUM(sodium) as sodium, initial_calories, C.id_status, name_status FROM meal_record as M join calories_result as C ON M.id_user = C.id_user and M.date_r = C.date join status as S ON S.id_status = C.id_status WHERE M.date_r = ? and  C.id_user = ?', [req.params.date_r, req.params.id_user], (err, rows, fields) => {
+      const { date_r, id_user } = req.body;
+      var id_estatus = 1;
+        mysqlConnection.query('SELECT SUM(calories) as calories, SUM(protein) as protein, SUM(fat) as fat, SUM(carbs) as carbs, SUM(sugar) as sugar, SUM(sodium) as sodium, initial_calories, C.id_status, name_status, date, M.id_user FROM meal_record as M join calories_result as C ON M.id_user = C.id_user and M.date_r = C.date join status as S ON S.id_status = C.id_status WHERE M.date_r = ? and  C.id_user = ?', [date_r, id_user], (err, rows, fields) => {
           if (!err) {
-            res.send(rows);
+            res.send(rows[0]);
+              var calculocalorias = rows[0].calories;
+              var initial_calories = rows[0].initial_calories;
+              var operation1 = initial_calories / 2; //vas bien
+     
+          //3000 / 2 = 1500
+          // calorias consumidas 1200
+          if(initial_calories == null){
+            id_estatus = 1;
+            console.log('entroo estatus 1');
+            console.log(id_estatus);
+          }else if (initial_calories == 0 || calculocalorias <= operation1) {
+            id_estatus = 2;
+            console.log('entroo estatus 2');
+            console.log(id_estatus);
+        
+          } else if (calculocalorias > operation1 &&
+              calculocalorias < initial_calories) {
+            id_estatus = 3;
+            console.log('entroo estatus 3');
+            console.log(id_estatus);
+          }
+          if (calculocalorias > initial_calories) {
+            id_estatus = 4;
+            console.log('entroo estatus 4');
+            console.log(id_estatus);
+          }
+            mysqlConnection.query('UPDATE calories_result SET id_status = ? WHERE id_user = ? and date = ?', [id_estatus, id_user, date_r], (error, results) => {
+              if (error) {
+                  res.send({ message: "Error en el registro", statusCode: 400 });
+              } else {
+                  if (results.changedRows > 0) {
+                    console.log('SE ACTUALIZO');
+                  } else {
+
+                    console.log('NO SE ACTUALIZO');
+                  }
+              }
+          });
           } else {
             console.log(err);
           }
@@ -24,7 +64,7 @@ exports.caloriesdata = async (req, res) => {
 
       mysqlConnection.query('SELECT SUM(calories) as calories, SUM(protein) as protein, SUM(fat) as fat, SUM(carbs) as carbs, SUM(sugar) as sugar, initial_calories FROM meal_record WHERE date_r = "2021-11-09" and ?', [params], (err, rows, fields) => {
         if (!err) {
-  
+          var calories = rows.id_user + rows.id_user;  
           res.send(rows);
         } else {
           console.log(err);
