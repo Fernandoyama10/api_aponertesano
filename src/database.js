@@ -7,7 +7,6 @@ var connectionn = mysql.createPool({
     port: '12451'
 });
 
-
 connectionn.getConnection((err, connection) => {
     if (err) {
         if (err.code === 'PROTOCOL_CONNECTION_LOST') {

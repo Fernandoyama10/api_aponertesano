@@ -18,7 +18,6 @@ exports.getyucfoodName = async (req, res) => {
     mysqlConnection.query('INSERT INTO RESPONSESSMS ?', { ClienteID: clienteID, Reference: reference, Number: number, Message: message, Response: response, Send_date: send_date, Response_date: response_date }, (err, rows, fields) => {
       if (!err) {
         res.json(rows);
-
       } else {
         console.log(err);
       }
