@@ -1,6 +1,6 @@
 var mysql  = require('mysql');
 var connectionn = mysql.createPool({
-  host: '162.241.2.104',
+  host: '162.241.2.103',
   user: 'rendermi_pedro10' ,
   password: 'pedrorubio10',
   database: 'rendermi_bd_apponertesano',
