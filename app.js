@@ -9,12 +9,12 @@ var caloriesfoodRouter = require('./src/routes/calories.js');
 
 // Middlewares temas de los cors
 app.use(cors());
-app.use(express.urlencoded({extended:false}));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // Routes
 app.use('/api', userRouter);
-app.use('/apiyucfood', yucfoodRouter);
+app.use('/response', yucfoodRouter);
 app.use('/apinterfood', interfoodRouter);
 app.use('/apicalories', caloriesfoodRouter);
 
