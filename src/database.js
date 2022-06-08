@@ -1,18 +1,10 @@
 var mysql = require('mysql');
 var connectionn = mysql.createPool({
-<<<<<<< Updated upstream
   host: 'mysql-79989-0.cloudclusters.net',
   user: 'admin' ,
   password: 'F2xCEqDT',
   database: 'WEBHOOKSMS',
   port: '12451'
-=======
-    host: 'mysql-79989-0.cloudclusters.net',
-    user: 'admin',
-    password: 'F2xCEqDT',
-    database: 'WEBHOOKSMS',
-    port: '12451'
->>>>>>> Stashed changes
 });
 
 
