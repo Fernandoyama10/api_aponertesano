@@ -25,7 +25,7 @@ exports.getyucfoodName = async (req, res) => {
       if (type === 'response') {
         mysqlConnection.query('INSERT INTO RESPONSESSMS SET ?', { ClienteID: clienteID, Reference: reference, Number: number, Message: message, Response: response, Send_date: send_date, Response_date: response_date }, (err, rows) => {
           if (!err) {
-            var status = { status: "OK" }
+            var status = { status: "200" }
             res.json(status);
           } else {
             var status = { status: "ERROR" }
