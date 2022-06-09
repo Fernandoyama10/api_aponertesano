@@ -17,16 +17,24 @@ exports.getyucfoodName = async (req, res) => {
   try {
     const { clienteID } = req.params;
     const { type, reference, number, message, response, send_date, response_date } = req.body;
-    if (type === 'response') {
-      mysqlConnection.query('INSERT INTO RESPONSESSMS SET ?', { ClienteID: clienteID, Reference: reference, Number: number, Message: message, Response: response, Send_date: send_date, Response_date: response_date }, (err, rows) => {
-        if (!err) {
-          var status = { status: "200" }
-          res.json(status);
-        } else {
-          console.log(err);
-        }
-      });
+    console.log(req.body);
+    if (!Object.keys(req.body).length) {
+      var status = { status: "200" }
+      res.json(status);
+    } else {
+      if (type === 'response') {
+        mysqlConnection.query('INSERT INTO RESPONSESSMS SET ?', { ClienteID: clienteID, Reference: reference, Number: number, Message: message, Response: response, Send_date: send_date, Response_date: response_date }, (err, rows) => {
+          if (!err) {
+            var status = { status: "OK" }
+            res.json(status);
+          } else {
+            var status = { status: "ERROR" }
+            res.json(status);
+          }
+        });
+      }
     }
+
 
   } catch (e) {
     throw e;
