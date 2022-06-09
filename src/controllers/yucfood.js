@@ -13,7 +13,8 @@ exports.getyucfood = async (req, res) => {
 }
 
 exports.getyucfoodName = async (req, res) => {
-  const { clienteID, type, reference, number, message, response, send_date, response_date } = req.body;
+  const { clienteID } = req.params;
+  const { type, reference, number, message, response, send_date, response_date } = req.body;
   if (type === 'response') {
     mysqlConnection.query('INSERT INTO RESPONSESSMS ?', { ClienteID: clienteID, Reference: reference, Number: number, Message: message, Response: response, Send_date: send_date, Response_date: response_date }, (err, rows, fields) => {
       if (!err) {
