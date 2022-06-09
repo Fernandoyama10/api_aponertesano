@@ -15,11 +15,11 @@ exports.getyucfood = async (req, res) => {
 exports.getyucfoodName = async (req, res) => {
 
   try {
-    console.log(req.params);
+
     const { clienteID } = req.params;
-    const { type, reference, number, message, response, send_date, response_date } = req.body;
-    console.log(req.body);
-    if (!Object.keys(req.body).length) {
+    const { type, reference, number, message, response, send_date, response_date } = req.query;
+    console.log(req.query);
+    if (!Object.keys(req.query).length) {
       var status = { status: "200" }
       res.json(status);
     } else {
@@ -30,7 +30,6 @@ exports.getyucfoodName = async (req, res) => {
             res.json(status);
           } else {
             console.log(err);
-            console.log(send_date);
             var status = { status: "ERROR" }
             res.json(status);
           }
