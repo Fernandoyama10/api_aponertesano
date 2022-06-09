@@ -15,6 +15,7 @@ exports.getyucfood = async (req, res) => {
 exports.getyucfoodName = async (req, res) => {
 
   try {
+    console.log(req.params);
     const { clienteID } = req.params;
     const { type, reference, number, message, response, send_date, response_date } = req.body;
     console.log(req.body);
@@ -28,6 +29,8 @@ exports.getyucfoodName = async (req, res) => {
             var status = { status: "200" }
             res.json(status);
           } else {
+            console.log(err);
+            console.log(send_date);
             var status = { status: "ERROR" }
             res.json(status);
           }
